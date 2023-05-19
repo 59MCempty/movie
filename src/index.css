@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply box-border p-0 m-0 bg-black
+}
+.bgShadow {
+    background: linear-gradient(to right, #000);
+}
+
