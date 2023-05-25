@@ -1,0 +1,42 @@
+import {URLIMG} from "./utils/api.js";
+import {Link} from "react-router-dom";
+import {MdPlayArrow} from "react-icons/md"
+
+const DisplaySearchList = ({list}) => {
+	console.log(list)
+	return (
+
+		<div className="grid grid-cols-4 w-full top-0 gap-y-2 pb-10">
+			{
+				list?.map(item =>
+					<div
+						key={item?.id}
+						className="h-[550px] w-[340px] relative">
+						<img
+							className="w-full h-full block object-cover"
+							src={`${URLIMG}original${item?.backdrop_path || item?.poster_path}`}
+							alt={item?.title}/>
+						<div
+							className="h-full text-white grid place-items-center transition-all ease-out duration-150 delay-150 cursor-pointer text-xl w-full absolute bottom-0 hover:bg-black/80 opacity-0 hover:opacity-100">
+							<div className="flex flex-col items-center gap-y-3 justify-center">
+								<Link
+									to={`/movie/${item?.id}`}
+									state={{movie: item, media_type: "movie"}}
+									className="border border-red-600 bg-red-700 w-28 flex items-center justify-center ">
+									<MdPlayArrow size={40}/>
+								</Link>
+								<h1 className="w-full px-3 flex justify-center items-center">
+									{item?.title || item?.name}
+								</h1>
+							</div>
+
+						</div>
+					</div>
+				)
+			}
+		</div>
+
+	);
+};
+
+export default DisplaySearchList;

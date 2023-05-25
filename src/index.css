@@ -2,10 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply box-border p-0 m-0 bg-black
+
+@layer base {
+    body {
+        @apply box-border p-0 m-0 bg-[#141414]
+    }
 }
-.bgShadow {
-    background: linear-gradient(to right, #000);
+
+@layer components {
+    .shadowBanner {
+        @apply absolute left-0 top-0 h-[95vh] w-full bg-gradient-to-r from-[#121212] opacity-70
+    }
+    .buttonBanner {
+        @apply font-bold hover:opacity-100 transition ease-in-out delay-150 opacity-80 flex items-center justify-center py-2 gap-x-3 text-2xl border-2 my-2 rounded-lg w-40
+    }
+
+    .buttonSlide {
+        @apply text-gray-200 z-[100] absolute cursor-pointer opacity-0 transition ease-in duration-300
+    }
+
+    .navbarHeader {
+        @apply text-white rounded-xl px-2 transition-all duration-300 ease-out hover:bg-red-600 font-medium cursor-pointer
+    }
+    .navbarActive {
+        @apply text-white rounded-xl px-2 transition-all duration-300 ease-out bg-red-600 hover:bg-red-500 font-medium cursor-pointer
+    }
+
+    .background {
+        @apply bg-gradient-to-b from-gray-900/10 to-[#010511]
+    }
+    .bannerImg {
+        @apply w-screen h-[95vh] object-cover -z-10
+    }
 }
+
 

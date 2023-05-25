@@ -1,46 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import {apiGetMovies } from './utils/api.js'
+import React, {useEffect, useState} from 'react'
 import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons/bs"
-import Card from './card.jsx'
-import { NavLink } from 'react-router-dom'
+import Card from './Card.jsx'
 
-const RowComponents = ({title, idx}) => {
-    const [moviesList, setMovieList] = useState([])
-    const getMoviesFromApi = async (param) => {
-        const response =  await apiGetMovies(param)
-        setMovieList(response)
-    }
-    useEffect(() => {
-        getMoviesFromApi(title)
-    }, [])
+const RowComponents = ({category, title, idx, media}) => {
+	const moveLeft = () => {
+		let move = document.getElementById("slide" + idx)
+		move.scrollLeft -= 500
+	}
+	const moveRight = () => {
+		let move = document.getElementById("slide" + idx)
+		move.scrollLeft += 500
+	}
 
-    const moveLeft = () => {
-        let move = document.getElementById("slide" + idx)
-        move.scrollLeft -= 500
-    }
-    const moveRight = () => {
-        let move = document.getElementById("slide" + idx)
-        move.scrollLeft += 500
-
-    }
-    return (
-        <div className="my-5 mx-3">
-            <NavLink to={`/${title}`} state={{ myData: moviesList }} className="text-white w-[16%] my-10 capitalize pl-3 py-5 ml-3 rounded-lg bg-red-600 shadow-xl shadow-red-700 border-red-700 text-4xl grid place-items-center border-2 border">
-                {title}
-            </NavLink>
-            <div className="pl-4 flex items-center mt-3 pl-3 relative group">
-                <BsFillArrowLeftCircleFill onClick={moveLeft} className="text-gray-200 z-[100] ml-2 absolute left-0 cursor-pointer opacity-0 group-hover:opacity-100 transition ease-in duration-300" size={40} />
-                <div id={'slide' + idx} className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-                    {moviesList?.map(item =>
-                        <div key={item?.id} className="inline-block mr-3 space-x-3 ">
-                            <Card item={item} />
-                        </div>
-                    )}
-                </div>
-                <BsFillArrowRightCircleFill onClick={moveRight} className="text-gray-200 z-[100] mr-2 absolute right-0 cursor-pointer opacity-0 group-hover:opacity-100 transition ease-in duration-300r" size={40} />
-            </div>
-        </div>
-    )
+	return (
+		category &&
+		<div className="mx-3 mt-10">
+			<div
+				className="text-white w-[18%] hover:w-[20%] pl-1 py-4 mx-4 my-2 flex items-center gap-x-2 group">
+				<h1 className="capitalize font-bold text-3xl">
+					{title}
+				</h1>
+			</div>
+			<div className="px-3 flex items-center mt-3 relative group">
+				<BsFillArrowLeftCircleFill
+					onClick={moveLeft}
+					className="buttonSlide left-0 group-hover:opacity-100"
+					size={40}/>
+				<div
+					id={'slide' + idx}
+					className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
+					{category?.map(item =>
+						<div
+							key={item?.id}
+							className="inline-block px-5 space-x-3 transition-all ease-in-out duration-300 delay-150 cursor-pointer hover:mx-5">
+							<Card item={item} media={media}/>
+						</div>
+					)}
+				</div>
+				<BsFillArrowRightCircleFill
+					onClick={moveRight}
+					className="buttonSlide right-0 group-hover:opacity-100"
+					size={40}/>
+			</div>
+		</div>
+	)
 }
 
 export default RowComponents

@@ -1,25 +1,28 @@
 import React from 'react'
 import Homepage from './components/Homepage.jsx'
-import { Route, Routes, BrowserRouter } from 'react-router-dom'
-import Populate from './components/Populate.jsx'
-import Tv_show from './components/Top_rated.jsx'
-import Upcoming from './components/Upcoming.jsx'
+import {Route, Routes, BrowserRouter} from 'react-router-dom'
+import Movies from './components/Movies.jsx'
 import Navbar from './components/Navbar.jsx'
+import Tv_shows from "./components/Tv_shows.jsx";
+import MediaDetails from "./components/MediaDetails.jsx";
+import SearchPage from "./components/SearchPage.jsx";
 
 function App() {
-  return (
-    <BrowserRouter>
-        <div className="h-screen w-full">
-            <Navbar />
-            <Routes >
-                <Route path='/' element={<Homepage />} />
-                <Route path='/popular' element={<Populate />} />
-                <Route path='/top_rated' element={<Tv_show />} />
-                <Route path='/upcoming' element={<Upcoming />} />
-            </Routes>
-        </div>
-    </BrowserRouter>
-  )
+	return (
+		<BrowserRouter>
+			<div className="h-screen w-full lg:h-[140vh]">
+				<Navbar/>
+				<Routes>
+					<Route path='/' element={<Homepage/>}/>
+					<Route path='/movie' element={<Movies/>}/>
+					<Route path='/tv' element={<Tv_shows/>}/>
+					<Route path='/movie/:id' element={<MediaDetails/>}/>
+					<Route path='/tv/:id' element={<MediaDetails/>}/>
+					<Route path='/search' element={<SearchPage />}/>
+				</Routes>
+			</div>
+		</BrowserRouter>
+	)
 }
 
 export default App
