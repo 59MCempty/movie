@@ -1,21 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {apiMovieDetails, URLIMG} from "./utils/api.js";
+import detailsApi from "./utils/modules/mediaDetails.api.js";
+import urlConfigs from "./utils/modules/url.js";
 import {HiChevronRight, HiChevronLeft} from "react-icons/hi"
+import {Link} from "react-router-dom";
 
 const CastList = ({movie, media}) => {
 	const [castList, setCastList] = useState([])
 
-	const getCastData = async (movie_id, kind, param) => {
-		const response = await apiMovieDetails(movie_id, kind, param)
+	const getCastData = async (media, movie_id, category) => {
+		const response = await detailsApi.getMediaList(media, movie_id, category)
 		if (response) {
 			setCastList(response?.cast)
 		}
 	}
 
 	useEffect(() => {
-		getCastData(movie?.id, media, "/credits")
+		getCastData(media, movie?.id, "credits")
 	}, [])
-	
 
 	const moveLeft = () => {
 		let move = document.getElementById("slide")
@@ -26,6 +27,7 @@ const CastList = ({movie, media}) => {
 		move.scrollLeft += 500
 
 	}
+	console.log("castList >>>",castList)
 	return (
 		<div className="max-w-full flex items-center ">
 			<div className="w-full relative group">
@@ -38,13 +40,14 @@ const CastList = ({movie, media}) => {
 					id="slide"
 					className="flex overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide gap-x-5 group">
 					{castList?.map(cast =>
-						<div key={cast?.cast_id} className="min-w-[200px] h-full inline-block cursor-pointer ">
-							<img src={`${URLIMG}w500${cast?.profile_path}`} alt={cast?.name}
-								 className="h-[240px] w-[200px] object-cover"/>
+						<Link to={`/person/${cast?.id}}`} state={{id: cast?.id}} key={cast?.cast_id} className="min-w-[200px] h-full inline-block cursor-pointer ">
+							<img
+								src={urlConfigs.posterPath(cast?.profile_path)} alt={cast?.name}
+								className="h-[240px] w-[200px] object-cover"/>
 							<h1 className="text-lg font-normal bottom-0 bg-gray-950/80 text-gray-400 pl-3">
 								{cast?.name}
 							</h1>
-						</div>
+						</Link>
 					)}
 				</div>
 				<button

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {FetchGetapi} from './utils/api.js'
+import trendingApi from "./utils/modules/trending.api.js"
 import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons/bs"
 import Card from './Card.jsx'
 import {Link} from 'react-router-dom'
@@ -8,7 +8,7 @@ const RowTrending = ({title, idx}) => {
 	const [moviesList, setMovieList] = useState([])
 
 	const dataTredingPopular = async (type) => {
-		const res = await FetchGetapi(type)
+		const res = await trendingApi.getTrending(type)
 		if (res?.length > 0) {
 			setMovieList(res)
 		}
@@ -51,7 +51,7 @@ const RowTrending = ({title, idx}) => {
 					className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">{moviesList?.map(item =>
 					<div
 						key={item?.id}
-						className="inline-block px-3 space-x-3 transition-all ease-in-out duration-300 delay-150 cursor-pointer hover:mx-5">
+						className="inline-block p-3 space-x-3 transition-all ease-in-out duration-300 delay-150 cursor-pointer hover:border hover:mx-5">
 						{item && <Card item={item} media={item?.media_type}/>}
 					</div>
 				)}

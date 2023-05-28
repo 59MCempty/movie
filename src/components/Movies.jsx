@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {URLIMG, apiGetMovies} from './utils/api.js'
-import {BsFillPlayFill,} from "react-icons/bs"
-import {AiOutlineExclamationCircle} from "react-icons/ai"
+import mediaApi from "./utils/modules/media.api.js";
 import RowComponents from './RowComponents.jsx'
 import axios from "axios";
 import Spinner from "./Spinner.jsx";
-import {Link} from "react-router-dom";
+import BannerDetails from "./BannerDetails.jsx";
+import urlConfigs from "./utils/modules/url.js";
 
 const Movies = () => {
 	const [movieCategories, setMovieCategories] = useState({
@@ -14,16 +13,16 @@ const Movies = () => {
 		upcoming: null,
 	})
 	const [loading, setLoading] = useState(false);
-	const params = ["popular", "top_rated", "upcoming"]
+	const params = Object.values(urlConfigs.mediaCategoryOfMovie)
 
 	const dataMovies = async () => {
 		setLoading(true)
 		try {
 			const request = params.map(async param => {
-				const res = await apiGetMovies(param)
+				const res = await mediaApi.getMovieType(param)
 				// check
 				const obj = {}
-				obj[param] = res
+				obj[param] = res.results
 				return obj
 			})
 			const response = await axios.all(request)
@@ -31,7 +30,6 @@ const Movies = () => {
 			if (response && response.length > 0) {
 				await response.forEach((item) => {
 					if (Object.keys(item)[0] === "popular" && Object.values(item)[0].length > 0) {
-						console.log(Object.values(item)[0])
 						setMovieCategories(prevState => ({
 							...prevState,
 							popular: Object.values(item)[0]
@@ -66,30 +64,8 @@ const Movies = () => {
 	return (
 
 		<div className="background relative">
-			<Spinner loading={loading} list={popular}/>
-			<img
-				className="bannerImg"
-				src={`${URLIMG}original/${movie?.backdrop_path || movie?.poster_path}`}
-				alt="background"/>
-			<div className="shadowBanner"></div>
-
-			<div className="text-white w-full flex flex-col absolute top-[30%] pl-20">
-				<div className="flex items-center gap-x-5">
-					<button
-						className="buttonBanner hover:bg-black hover:border-black bg-gray-900 border-gray-800">
-						<BsFillPlayFill size={40}/> <span>Play</span></button>
-					<button
-						className="buttonBanner hover:bg-gray-300 border-gray-50">
-						<AiOutlineExclamationCircle size={40}/>
-						<Link to={`/movie/${movie?.id}`} state={{movie: movie, media_type: "movie"}}
-						>Details</Link></button>
-				</div>
-				<div className="flex flex-col gap-y-2">
-					<h1 className="text-3xl">{movie?.title || movie?.original_title}</h1>
-					<h1 className="text-gray-400">Release Date: {movie?.release_date}</h1>
-					<h1 className="w-[50%] text-lg">{movie?.overview}</h1>
-				</div>
-			</div>
+			{popular && <Spinner loading={loading} list={popular}/>}
+			<BannerDetails media={movie}/>
 			<section className="m-5 absolute top-[70%] py-10">
 				<RowComponents
 					media={media_type}

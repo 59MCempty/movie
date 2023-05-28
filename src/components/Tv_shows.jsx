@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {apiGetMovies, apiGetTv_shows, URLIMG} from "./utils/api.js";
+import mediaApi from "./utils/modules/media.api.js";
 import axios from "axios";
-import {BsFillPlayFill} from "react-icons/bs";
-import {AiOutlineExclamationCircle} from "react-icons/ai";
 import RowComponents from "./RowComponents.jsx";
 import Spinner from "./Spinner.jsx";
-import ratedStar from "./RatedStar.jsx";
-import {Link} from "react-router-dom";
+import BannerDetails from "./BannerDetails.jsx";
+import urlConfigs from "./utils/modules/url.js";
 
 const Tv_shows = () => {
 	const [tvshowsCategories, setTvshowsCategories] = useState({
@@ -15,18 +13,18 @@ const Tv_shows = () => {
 		top_rated: null,
 		on_the_air: null,
 	});
-	const params = ["airing_today", "popular", "top_rated", "on_the_air"]
 	const [loading, setLoading] = useState(false);
+	const params = Object.values(urlConfigs.mediaCategoryOfTVSeries)
 
 
 	const getDataSeries = async () => {
 		setLoading(true)
 		try {
 			const request = params.map(async param => {
-				const res = await apiGetTv_shows(param)
+				const res = await mediaApi.getSeriesType(param)
 				// check
 				const obj = {}
-				obj[param] = res
+				obj[param] = res?.results
 				return obj
 			})
 
@@ -76,32 +74,8 @@ const Tv_shows = () => {
 	return (
 
 		<div className="background relative">
-			<Spinner loading={loading} list={airingToday}/>
-			<img
-				className="bannerImg"
-				src={`${URLIMG}original/${tv?.backdrop_path || tv?.poster_path}`}
-				alt="background"/>
-			<div className="shadowBanner"></div>
-
-			<div className="text-white w-full flex flex-col absolute top-[30%] pl-20">
-				<div className="flex items-center gap-x-5">
-					<button
-						className="buttonBanner hover:bg-black hover:border-black bg-gray-900 border-gray-800">
-						<BsFillPlayFill size={40}/> <span>Play</span></button>
-					<button
-						className="buttonBanner hover:bg-gray-300 border-gray-50">
-						<AiOutlineExclamationCircle size={40}/>
-						<Link to={`/tv/${tv?.id}`} state={{movie: tv, media_type: "tv"}}
-						>Details</Link></button>
-				</div>
-
-				<div className="flex flex-col gap-y-2">
-					<h1 className="text-3xl">{tv?.name || tv?.original_name}</h1>
-					<h1 className="text-gray-400">Release Date: {tv?.first_air_date}</h1>
-					<h1 className="w-[50%] text-lg">{tv?.overview}</h1>
-				</div>
-
-			</div>
+			{airingToday && <Spinner loading={loading} list={airingToday}/>}
+			<BannerDetails media={tv}/>
 			<section className="m-5 absolute top-[70%] py-10">
 				<RowComponents
 					media={media_type}

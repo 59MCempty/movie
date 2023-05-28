@@ -1,5 +1,5 @@
 const Spinner = ({loading, list}) => {
-
+	console.log("list >>>",list.length)
 	const loadingState = () => {
 		if (loading) {
 			return (

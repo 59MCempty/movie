@@ -1,29 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {apiMovieDetails} from "./utils/api.js";
+import urlConfigs from "./utils/modules/url.js";
+import detailsApi from "./utils/modules/mediaDetails.api.js";
 
-const VideoIntroduce = ({movie, param, media}) => {
+const VideoIntroduce = ({movie, media}) => {
 	const [trailers, setTrailers] = useState([]);
-	//const trailers = []
-	const YOUTUBE_LINK = 'https://www.youtube.com/embed/'
-	const videoDatas = async (movie_id, kind, param) => {
-		const response = await apiMovieDetails(movie_id, kind, param)
-		// if (response.results) {
-		// 	response?.results.slice(0, 1).map(movie => {
-		// 		if (movie?.site.toString().toLowerCase() === "youtube" && trailers.includes(YOUTUBE_LINK + movie?.key) === false) {
-		// 			setTrailers((prevState) =>
-		// 				[...prevState, YOUTUBE_LINK + movie?.key + "?rel=0"]
-		// 			)
-		// 		}
-		// 	})
-		// }
-		if (response?.results && trailers.includes(YOUTUBE_LINK + response?.results[0].key) === false) {
-			setTrailers(YOUTUBE_LINK + response?.results[0]?.key + "?rel=0")
+	const videoDatas = async (mediaType, mediaId, category) => {
+		const response = await detailsApi.getMediaList(mediaType, mediaId, category)
+		if (response?.results && trailers.includes(urlConfigs.youtubePath(response?.results[0]?.key)) === false) {
+			// setTrailers(YOUTUBE_LINK + response?.results[0]?.key + "?rel=0")
+			setTrailers(urlConfigs.youtubePath(response?.results[0]?.key))
 		}
 	}
 
 
 	useEffect(() => {
-		videoDatas(movie?.id, media, `/${param}`)
+		videoDatas(media, movie?.id, "videos")
 	}, [])
 
 	return (

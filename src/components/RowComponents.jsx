@@ -32,7 +32,7 @@ const RowComponents = ({category, title, idx, media}) => {
 					{category?.map(item =>
 						<div
 							key={item?.id}
-							className="inline-block px-5 space-x-3 transition-all ease-in-out duration-300 delay-150 cursor-pointer hover:mx-5">
+							className="inline-block p-4 space-x-3 transition-all ease-out duration-500 delay-150 cursor-pointer hover:mx-2 hover:border">
 							<Card item={item} media={media}/>
 						</div>
 					)}

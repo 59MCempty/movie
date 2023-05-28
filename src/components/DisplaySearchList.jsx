@@ -22,7 +22,7 @@ const DisplaySearchList = ({list}) => {
 								<Link
 									to={`/movie/${item?.id}`}
 									state={{movie: item, media_type: "movie"}}
-									className="border border-red-600 bg-red-700 w-28 flex items-center justify-center ">
+									className="border border-red-500 rounded-xl shadow-lg shadow-red-600 bg-red-600/90 w-28 flex items-center justify-center ">
 									<MdPlayArrow size={40}/>
 								</Link>
 								<h1 className="w-full px-3 flex justify-center items-center">

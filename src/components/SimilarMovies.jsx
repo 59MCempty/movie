@@ -11,7 +11,7 @@ const SimilarMovies = ({movie, media}) => {
 		const Similar = response.slice(0, 5)?.filter(item => {
 			return item?.id !== movie?.id
 		})
-		console.log(Similar)
+
 		setSimilarMovies(Similar)
 
 	}

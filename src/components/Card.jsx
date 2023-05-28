@@ -25,12 +25,12 @@ const Card = ({item, media}) => {
 				  onMouseOut={mouveOut}
 				  onMouseOver={mouveOver}
 				  className={`relative hover:scale-110 hover:z-[100]`}>
-			<img src={`${URLIMG}w300/${item?.backdrop_path}`} alt={item?.name}
-			/>
-			<h1 className={`absolute px-2 bottom-0 left-0 w-full bg-gradient-to-r from-gray-500 ${displayPlayBtn ? "block" : "hidden"}`}>{title(item?.title || item?.name, 20)}</h1>
-			<button className={`absolute top-2 left-2 mt-1 text-red-500 ${displayPlayBtn ? "block" : "hidden"}`}>
-				<AiFillPlayCircle size={30}/></button>
-		</Link>)
+		<img src={`${URLIMG}w300/${item?.backdrop_path}`} alt={item?.name}
+		/>
+		<h1 className={`absolute px-2 bottom-0 left-0 w-full bg-gradient-to-r from-gray-500 ${displayPlayBtn ? "block" : "hidden"}`}>{title(item?.title || item?.name, 20)}</h1>
+		<button className={`absolute top-2 left-2 mt-1 text-red-500 ${displayPlayBtn ? "block" : "hidden"}`}>
+			<AiFillPlayCircle size={30}/></button>
+	</Link>)
 }
 
 export default Card
