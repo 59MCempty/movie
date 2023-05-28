@@ -2,8 +2,8 @@ import {URLIMG} from "./utils/api.js";
 import {Link} from "react-router-dom";
 import {MdPlayArrow} from "react-icons/md"
 
-const DisplaySearchList = ({list}) => {
-	console.log(list)
+const DisplayCredits = ({list}) => {
+
 	return (
 
 		<div className="grid grid-cols-4 w-full top-0 gap-y-2 pb-10">
@@ -39,4 +39,4 @@ const DisplaySearchList = ({list}) => {
 	);
 };
 
-export default DisplaySearchList;
+export default DisplayCredits;

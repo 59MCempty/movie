@@ -68,7 +68,6 @@ export const apiMovieDetails = async (movie_id, kind, param) => {
 		console.log(err?.response?.status)
 	}
 }
-// https://api.themoviedb.org/3/search/keyword?query=superman&page=1
 export const apiSearch = async (type, keyword) => {
 	try {
 		const requestSearch = await axios.get(`${baseURL}search/${type}`, {

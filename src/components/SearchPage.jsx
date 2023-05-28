@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {apiSearch} from "./utils/api.js";
-import DisplaySearchList from "./DisplaySearchList.jsx";
+import DisplayCredits from "./DisplayCredits.jsx";
 import detailsApi from "./utils/modules/mediaDetails.api.js";
 
 
@@ -16,7 +16,7 @@ const SearchPage = () => {
 		setLoading(true)
 		try {
 			const response = await detailsApi.search(media_type, keyword)
-			console.log("search >>>", response)
+
 			setListSearch(response)
 		} finally {
 			setLoading(false)
@@ -89,7 +89,7 @@ const SearchPage = () => {
 			</div>
 
 			<div className="w-full h-full my-10">
-				{listSearch && <DisplaySearchList list={listSearch} media={media_type}/>}
+				{listSearch && <DisplayCredits list={listSearch} media={media_type}/>}
 			</div>
 		</div>
 	);
