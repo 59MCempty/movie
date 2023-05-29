@@ -5,11 +5,15 @@ import {AiOutlineExclamationCircle} from "react-icons/ai";
 import {Link} from "react-router-dom";
 
 const BannerDetails = ({media}) => {
+	console.log(
+		"banner >>>",
+		media
+	)
 	return (
 		<div>
 			<img
 				className="bannerImg"
-				src={`${URLIMG}original/${media?.backdrop_path || media?.poster_path}`}
+				src={`${URLIMG}original/${media?.media?.backdrop_path || media?.media?.poster_path}`}
 				alt="banner"/>
 			<div className="shadowBanner"></div>
 			<div className="text-white w-full flex flex-col absolute top-[30%] pl-20">
@@ -21,21 +25,21 @@ const BannerDetails = ({media}) => {
 						className="buttonBanner hover:bg-gray-300 border-gray-50">
 						<AiOutlineExclamationCircle size={40}/>
 						{media?.media_type === "movie" ?
-							<Link to={`/movie/${media?.id}`} state={{
-								movie: media,
+							<Link to={`/movie/${media?.media?.id}`} state={{
+								movie: media?.media,
 								media_type: media?.media_type
 							}}>Details</Link> :
-							<Link to={`/tv/${media?.id}`} state={{
-								movie: media,
+							<Link to={`/tv/${media?.media?.id}`} state={{
+								movie: media?.media,
 								media_type: media?.media_type
 							}}>Details</Link>}
 					</button>
 				</div>
 				<div className="flex flex-col gap-y-2">
-					<h1 className="text-3xl">{media?.title || media?.original_title || media?.name || media?.original_name}</h1>
+					<h1 className="text-3xl">{media?.media?.title || media?.media?.original_title || media?.media?.name || media?.media?.original_name}</h1>
 					<h1 className="text-gray-400">Release
-						Date: {media?.release_date || media?.first_air_date}</h1>
-					<h1 className="w-[50%] text-lg">{media?.overview}</h1>
+						Date: {media?.media?.release_date || media?.media?.first_air_date}</h1>
+					<h1 className="w-[50%] text-lg">{media?.media?.overview}</h1>
 				</div>
 			</div>
 		</div>

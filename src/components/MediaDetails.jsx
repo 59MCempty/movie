@@ -6,6 +6,7 @@ import VideoIntroduce from "./VideoIntroduce.jsx";
 import PosterMoive from "./PosterMoive.jsx";
 import SimilarMovies from "./SimilarMovies.jsx";
 import MovieDetails from "./MoiveDetails.jsx"
+import mediaApi from "./utils/modules/media.api.js";
 
 
 const MediaDetails = () => {
@@ -13,16 +14,30 @@ const MediaDetails = () => {
 	const location = useLocation()
 	const movie = location.state.movie
 	const media_type = location.state.media_type
+	console.log(location)
+	const getMovieDetails = async (movie_id, media_type) => {
+		console.log(media_type)
+		if (media_type === "movie") {
+			const response = await mediaApi.getMovieType(movie_id)
+			if(response) {
 
-	const getMovieDetails = async (movie_id, kind) => {
-		const response = await apiMovieDetails(movie_id, kind)
-		if (response) {
-			setMovieDetails(response)
+				setMovieDetails(response)
+			}
+		}
+		else if (media_type === 'tv') {
+			const response = await mediaApi.getSeriesType(movie_id)
+			if(response) {
+
+				setMovieDetails(response)
+			}
+		}
+		else {
+			return -1
 		}
 	}
 
 	useEffect(() => {
-		getMovieDetails(movie?.id, media_type,)
+		getMovieDetails(movie?.id, media_type)
 	}, [movie?.id])
 
 
@@ -35,10 +50,10 @@ const MediaDetails = () => {
 				alt="background"/>
 			<div className="absolute top-[60%] w-full grid grid-cols-5 h-[650px]">
 				<div className="col-span-2 flex justify-end opacity-85">
-					<div className="w-[85%] h-full shadow-xl ">
+					<div className="w-[65%] h-full shadow-xl ">
 						<img
 							className="h-full w-full object-cover"
-							src={urlConfigs.backdropPath(movieDetails?.backdrop_path)} alt={`${movieDetails?.title}`}/>
+							src={urlConfigs.backdropPath(movieDetails?.backdrop_path  || movieDetails?.poster_path)} alt={`${movieDetails?.title}`}/>
 					</div>
 				</div>
 				<div className="col-span-3 text-white px-10 pr-20 font-medium grid-rows-5">

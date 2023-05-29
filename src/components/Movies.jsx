@@ -65,7 +65,7 @@ const Movies = () => {
 
 		<div className="background relative">
 			{popular && <Spinner loading={loading} list={popular}/>}
-			<BannerDetails media={movie}/>
+			<BannerDetails media={{media_type: media_type, media: movie}}/>
 			<section className="m-5 absolute top-[70%] py-10">
 				<RowComponents
 					media={media_type}

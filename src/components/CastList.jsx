@@ -27,7 +27,7 @@ const CastList = ({movie, media}) => {
 		move.scrollLeft += 500
 
 	}
-	console.log("castList >>>",castList)
+
 	return (
 		<div className="max-w-full flex items-center ">
 			<div className="w-full relative group">

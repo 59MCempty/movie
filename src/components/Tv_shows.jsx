@@ -75,7 +75,7 @@ const Tv_shows = () => {
 
 		<div className="background relative">
 			{airingToday && <Spinner loading={loading} list={airingToday}/>}
-			<BannerDetails media={tv}/>
+			<BannerDetails media={{media_type: media_type, media: tv}}/>
 			<section className="m-5 absolute top-[70%] py-10">
 				<RowComponents
 					media={media_type}

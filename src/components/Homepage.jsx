@@ -30,7 +30,7 @@ const Homepage = () => {
 		return (
 			<div className="background relative">
 				<Spinner loading={loading} list={listTrending}/>
-				<BannerDetails media={trending} />
+				<BannerDetails media={{media_type: trending?.media_type, media: trending}} />
 				<section className="m-5 absolute top-[70%]">
 					<RowTrending idx='1' title="all"/>
 					<RowTrending idx='2' title="movie"/>
