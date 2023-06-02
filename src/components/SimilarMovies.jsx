@@ -1,22 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {apiGetMovies, apiGetTv_shows, URLIMG} from "./utils/api.js";
 import {Link, NavLink, useNavigate} from "react-router-dom";
-import Card from "./Card.jsx";
+import {similarApi} from "./utils/modules/similar.api.js";
+import urlConfigs from "./utils/modules/url.js";
+import DisplayCredits from "./DisplayCredits.jsx";
+import {useNavigation} from "react-router-dom";
+
 
 const SimilarMovies = ({movie, media}) => {
-	const [hasClick, setHasClick] = useState(false)
-	const [similarMovies, setSimilarMovies] = useState([]);
-	const getSimilar = async (param) => {
-		const response = media === "movie" ? await apiGetMovies(param) : await apiGetTv_shows(param)
-		const Similar = response.slice(0, 5)?.filter(item => {
-			return item?.id !== movie?.id
-		})
+	const [similarList, setSimilarList] = useState([]);
 
-		setSimilarMovies(Similar)
-
+	const getSimilar = async (mediaType, mediaId) => {
+		const response = await similarApi.getSimilar(mediaType, mediaId)
+		if (response) {
+			setSimilarList([...response].sort(() => 0.5 - Math.random()).slice(0, 4))
+		}
 	}
+	// const getMultipleRandom = (arr, num) => {
+	// 	const shuffled = [...arr].sort(() => 0.5 - Math.random());
+	// 	return shuffled.slice(0, num);
+	// }
+
 	useEffect(() => {
-		getSimilar("top_rated")
+		getSimilar(media, movie?.id)
 	}, [])
 
 
@@ -25,20 +30,8 @@ const SimilarMovies = ({movie, media}) => {
 			<h1 className="text-5xl uppercase text-white border-b-4 pb-1 border-red-600 font-medium w-[30%] my-3">
 				you may also like:
 			</h1>
-			<div className="grid grid-cols-5 gap-x-5">
-				{
-					SimilarMovies && similarMovies?.map(item =>
-						<div key={item?.id} className="w-[332px] h-[440px]">
-
-							<Link to={`/${media}/${item?.id}`} state={{movie: item, media_type: media}}>
-								<img
-									className="w-full h-full"
-									src={`${URLIMG}w500${item?.backdrop_path}`} alt={item?.title}/>
-							</Link>
-
-						</div>
-					)
-				}
+			<div className="w-full">
+				{similarList && <DisplayCredits list={similarList} media={media} />}
 			</div>
 		</div>
 	);

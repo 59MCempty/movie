@@ -5,6 +5,7 @@ import Card from './Card.jsx'
 import {Link} from 'react-router-dom'
 
 const RowTrending = ({title, idx}) => {
+
 	const [moviesList, setMovieList] = useState([])
 
 	const dataTredingPopular = async (type) => {
@@ -33,12 +34,13 @@ const RowTrending = ({title, idx}) => {
 		<div className="mx-3 my-10">
 			<div
 				className="text-white w-full px-6 py-5 flex items-center justify-between gap-x-2">
-				<h1 className="capitalize font-bold text-3xl">
+				<h1 className="capitalize font-bold text-3xl border-l-4 ml-2 pl-3">
 					{title} Trending
 				</h1>
 				<div className={`${title === 'all' ? 'hidden' : 'block'}`}>
-					<Link to={`/${title}`}
-						  className="text-xl font-medium border-2 px-5 py-2 rounded-xl hover:bg-gray-500 transition duration-500 delay-150 ease-in-out"
+					<Link
+						to={`/${title}`}
+						className="text-xl font-medium border-2 px-5 py-2 rounded-xl hover:bg-gray-500 transition duration-500 delay-150 ease-in-out"
 					>View More</Link>
 				</div>
 			</div>
@@ -58,7 +60,6 @@ const RowTrending = ({title, idx}) => {
 						</div>
 					)}
 				</div>
-
 				<BsFillArrowRightCircleFill
 					onClick={moveRight}
 					className="buttonSlide right-0 group-hover:opacity-100"

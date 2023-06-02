@@ -19,7 +19,7 @@ const RowComponents = ({item, media, index}) => {
 		<div className="mt-10">
 			<div
 				className="text-white w-[18%] hover:w-[20%] px-6 flex items-center gap-x-2 group">
-				<h1 className="capitalize font-bold text-3xl">
+				<h1 className="capitalize font-bold text-3xl ml-1 border-l-4 pl-3">
 					{title.replaceAll("_", " ")}
 				</h1>
 			</div>

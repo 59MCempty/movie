@@ -1,15 +1,15 @@
 import React from 'react';
-import {URLIMG} from "./utils/api.js";
 import {BsFillPlayFill} from "react-icons/bs";
 import {AiOutlineExclamationCircle} from "react-icons/ai";
 import {Link} from "react-router-dom";
+import urlConfigs from "./utils/modules/url.js";
 
 const BannerDetails = ({media}) => {
 	return (
 		<div>
 			<img
 				className="bannerImg"
-				src={`${URLIMG}original/${media?.media?.backdrop_path || media?.media?.poster_path}`}
+				src={`${urlConfigs.backdropPath(media?.media?.backdrop_path || media?.media?.poster_path)}`}
 				alt="banner"/>
 			<div className="shadowBanner"></div>
 			<div className="text-white w-full flex flex-col absolute top-[30%] pl-20">

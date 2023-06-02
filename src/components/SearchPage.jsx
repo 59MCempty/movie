@@ -39,7 +39,7 @@ const SearchPage = () => {
 	}
 	const selector = useSelector(searchSelector)
 	const isClick = selector.isClick
-
+	const media = useSelector(state => state.search.mediaType)
 	useEffect(() => {
 		if (mediaType) {
 			getSearchData(mediaType, keyword)
@@ -72,7 +72,7 @@ const SearchPage = () => {
 			)
 		}
 	}
-
+	console.log(media)
 	return (
 		<div className="lg:px-[10rem] py-20 h-full w-full">
 			{loadingPage()}
@@ -88,19 +88,19 @@ const SearchPage = () => {
 						type="button"
 						name="movie"
 						onClick={e => getValueName(e)}
-						className={`${isClick === true && mediaType === "movie" ? "bg-red-600" : ""} uppercase w-32 h-full hover:bg-red-900 px-3 text-xl font-medium text-white border border-red-500 `}>movie
+						className={`${isClick === true && mediaType === "movie" ? "bg-red-600 shadow-lg shadow-red-300" : ""} uppercase w-32 h-full hover:bg-red-900 px-3 text-xl font-medium text-white outline outline-red-600  border-none`}>movie
 					</button>
 					<button
 						type="button"
 						name="tv"
 						onClick={e => getValueName(e)}
-						className={`${isClick === true && mediaType === "tv" ? "bg-red-600" : ""} uppercase w-32 h-full hover:bg-red-900 px-3 text-xl font-medium text-white border border-red-500 `}>tv
+						className={`${isClick === true && mediaType === "tv" ? "bg-red-600 shadow-lg shadow-red-300" : ""} uppercase w-32 h-full hover:bg-red-900 px-3 text-xl font-medium text-white outline outline-red-600 border-none`}>tv
 					</button>
 				</div>
 			</div>
 
 			<div className="w-full h-full my-10">
-				{listSearch && <DisplayCredits list={listSearch} media={mediaType}/>}
+				{media && <DisplayCredits list={listSearch} media={media}/>}
 			</div>
 		</div>
 	);

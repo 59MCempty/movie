@@ -9,7 +9,7 @@ const CastInformation = () => {
 	const [actor, setActor] = useState({})
 	const location = useLocation()
 	const personId = location.state.id
-
+	console.log(location.state)
 	const getDetailsPerson = async (id) => {
 		const response = await personApi.detail(id)
 		if (response) {

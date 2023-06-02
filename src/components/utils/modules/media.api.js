@@ -21,7 +21,6 @@ const mediaApi = {
 		try {
 			const response = await privateClients.get(mediaType.mediaTypeList({media,top_view}))
 			if (response) {
-
 				return response
 			}
 		}

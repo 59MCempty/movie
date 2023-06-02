@@ -10,7 +10,6 @@ export const getMovieList = (movieList) => {
 		payload: movieList,
 	}
 }
-
 export const getSeries = (series) => {
 
 	return {
@@ -18,4 +17,12 @@ export const getSeries = (series) => {
 		payload: series,
 	}
 }
+export const getSimilar = (similar) => {
+
+	return {
+		type: "tv_series/getTvSeries",
+		payload: similar,
+	}
+}
+
 

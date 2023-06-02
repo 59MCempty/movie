@@ -5,7 +5,7 @@
 
 @layer base {
     body {
-        @apply box-border p-0 m-0 bg-[#141414]
+        @apply box-border p-0 m-0 bg-black/95
     }
 }
 
@@ -22,10 +22,10 @@
     }
 
     .navbarHeader {
-        @apply text-white rounded-xl px-2 transition-all duration-300 ease-out hover:bg-red-600 font-medium cursor-pointer
+        @apply text-white rounded-xl px-2 py-3 transition-all duration-300 ease-out hover:bg-red-600 font-medium cursor-pointer
     }
     .navbarActive {
-        @apply text-white rounded-xl px-2 transition-all duration-300 ease-out bg-red-600 hover:bg-red-500 font-medium cursor-pointer
+        @apply text-white rounded-xl px-2 py-3 transition-all duration-300 ease-out bg-red-600 hover:bg-red-500 font-medium cursor-pointer
     }
 
     .background {

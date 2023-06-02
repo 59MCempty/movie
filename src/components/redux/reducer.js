@@ -12,7 +12,8 @@ const initialState = {
 	tv: {
 		mediaType: "tv",
 		series: [],
-	}
+	},
+	similar: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -38,6 +39,11 @@ const rootReducer = (state = initialState, action) => {
 					...state.tv,
 					series: action.payload,
 				}
+			}
+		case 'similar':
+			return {
+				...state,
+				similar: action.payload
 			}
 		default:
 			return state
