@@ -2,23 +2,25 @@ import React, {useEffect, useState} from 'react'
 import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons/bs"
 import Card from './Card.jsx'
 
-const RowComponents = ({category, title, idx, media}) => {
+const RowComponents = ({item, media, index}) => {
+
+	const title = Object.keys(item)[0]
 	const moveLeft = () => {
-		let move = document.getElementById("slide" + idx)
+		let move = document.getElementById("slide" + index)
 		move.scrollLeft -= 500
 	}
 	const moveRight = () => {
-		let move = document.getElementById("slide" + idx)
+		let move = document.getElementById("slide" + index)
 		move.scrollLeft += 500
 	}
 
 	return (
-		category &&
-		<div className="mx-3 mt-10">
+		item &&
+		<div className="mt-10">
 			<div
-				className="text-white w-[18%] hover:w-[20%] pl-1 py-4 mx-4 my-2 flex items-center gap-x-2 group">
+				className="text-white w-[18%] hover:w-[20%] px-6 flex items-center gap-x-2 group">
 				<h1 className="capitalize font-bold text-3xl">
-					{title}
+					{title.replaceAll("_", " ")}
 				</h1>
 			</div>
 			<div className="px-3 flex items-center mt-3 relative group">
@@ -27,12 +29,12 @@ const RowComponents = ({category, title, idx, media}) => {
 					className="buttonSlide left-0 group-hover:opacity-100"
 					size={40}/>
 				<div
-					id={'slide' + idx}
+					id={'slide' + index}
 					className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-					{category?.map(item =>
+					{Object.values(item)[0]?.map(item =>
 						<div
 							key={item?.id}
-							className="inline-block p-4 space-x-3 transition-all ease-out duration-500 delay-150 cursor-pointer hover:mx-2 hover:border">
+							className="inline-block p-4 space-x-3 transition-all ease-out duration-300 delay-150 cursor-pointer hover:mx-7">
 							<Card item={item} media={media}/>
 						</div>
 					)}

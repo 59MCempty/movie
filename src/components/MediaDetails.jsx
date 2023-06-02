@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import urlConfigs from "./utils/modules/url.js";
-import {apiMovieDetails} from "./utils/api.js";
 import VideoIntroduce from "./VideoIntroduce.jsx";
 import PosterMoive from "./PosterMoive.jsx";
 import SimilarMovies from "./SimilarMovies.jsx";
@@ -14,24 +13,18 @@ const MediaDetails = () => {
 	const location = useLocation()
 	const movie = location.state.movie
 	const media_type = location.state.media_type
-	console.log(location)
 	const getMovieDetails = async (movie_id, media_type) => {
-		console.log(media_type)
 		if (media_type === "movie") {
 			const response = await mediaApi.getMovieType(movie_id)
-			if(response) {
-
+			if (response) {
 				setMovieDetails(response)
 			}
-		}
-		else if (media_type === 'tv') {
+		} else if (media_type === 'tv') {
 			const response = await mediaApi.getSeriesType(movie_id)
-			if(response) {
-
+			if (response) {
 				setMovieDetails(response)
 			}
-		}
-		else {
+		} else {
 			return -1
 		}
 	}
@@ -53,7 +46,8 @@ const MediaDetails = () => {
 					<div className="w-[65%] h-full shadow-xl ">
 						<img
 							className="h-full w-full object-cover"
-							src={urlConfigs.backdropPath(movieDetails?.backdrop_path  || movieDetails?.poster_path)} alt={`${movieDetails?.title}`}/>
+							src={urlConfigs.backdropPath(movieDetails?.backdrop_path || movieDetails?.poster_path)}
+							alt={`${movieDetails?.title}`}/>
 					</div>
 				</div>
 				<div className="col-span-3 text-white px-10 pr-20 font-medium grid-rows-5">

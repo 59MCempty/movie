@@ -13,7 +13,6 @@ const privateClients = axios.create({
 	}
 });
  privateClients.interceptors.request.use(async config => {
-	console.log("config >>>", config)
 	return {
 		...config,
 		headers: {

@@ -3,15 +3,13 @@ import {Link} from "react-router-dom";
 import {MdPlayArrow} from "react-icons/md"
 
 const DisplayCredits = ({list}) => {
-
 	return (
-
-		<div className="grid grid-cols-4 w-full top-0 gap-y-2 pb-10">
+		<div className="grid grid-cols-4 w-full top-0 lg:gap-x-8 xl:gap-x-3 gap-y-3 pb-10">
 			{
 				list?.map(item =>
 					<div
 						key={item?.id}
-						className="h-[550px] w-[340px] relative">
+						className="lg:h-[450px] lg:w-[220px] xl:h-[550px] xl:w-[350px] relative">
 						<img
 							className="w-full h-full block object-cover"
 							src={`${URLIMG}original${item?.backdrop_path || item?.poster_path}`}

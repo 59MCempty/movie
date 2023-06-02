@@ -27,20 +27,21 @@ const RowTrending = ({title, idx}) => {
 		move.scrollLeft += 500
 
 	}
-	const noAll = title === 'all' ? "group-hover:hidden" : ""
+
 	return (
 		moviesList &&
-		<div className="mx-3 mt-10">
-			<Link
-				to={`/${title === "all" ? "" : title}`}
-				className="text-white w-[18%] hover:w-[20%] pl-1 py-4 mx-4 my-2 flex items-center gap-x-2 group">
+		<div className="mx-3 my-10">
+			<div
+				className="text-white w-full px-6 py-5 flex items-center justify-between gap-x-2">
 				<h1 className="capitalize font-bold text-3xl">
 					{title} Trending
 				</h1>
-				<span className={`pt-2 hidden transition delay-700 duration-300 ease-in-out group-hover:block group-hover:underline-offset-2 underline
-					${noAll}`}
-				>Watch All</span>
-			</Link>
+				<div className={`${title === 'all' ? 'hidden' : 'block'}`}>
+					<Link to={`/${title}`}
+						  className="text-xl font-medium border-2 px-5 py-2 rounded-xl hover:bg-gray-500 transition duration-500 delay-150 ease-in-out"
+					>View More</Link>
+				</div>
+			</div>
 			<div className="px-3 flex items-center mt-3 relative group">
 				<BsFillArrowLeftCircleFill
 					onClick={moveLeft}
@@ -48,13 +49,14 @@ const RowTrending = ({title, idx}) => {
 					size={40}/>
 				<div
 					id={'slide' + idx}
-					className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">{moviesList?.map(item =>
-					<div
-						key={item?.id}
-						className="inline-block p-3 space-x-3 transition-all ease-in-out duration-300 delay-150 cursor-pointer hover:border hover:mx-5">
-						{item && <Card item={item} media={item?.media_type}/>}
-					</div>
-				)}
+					className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
+					{moviesList?.map(item =>
+						<div
+							key={item?.id}
+							className="inline-block space-x-3 transition-all ease-in-out mx-5 duration-300 delay-150 cursor-pointer hover:mx-7">
+							{item && <Card item={item} media={item?.media_type}/>}
+						</div>
+					)}
 				</div>
 
 				<BsFillArrowRightCircleFill

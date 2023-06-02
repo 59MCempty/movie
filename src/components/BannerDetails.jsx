@@ -5,10 +5,6 @@ import {AiOutlineExclamationCircle} from "react-icons/ai";
 import {Link} from "react-router-dom";
 
 const BannerDetails = ({media}) => {
-	console.log(
-		"banner >>>",
-		media
-	)
 	return (
 		<div>
 			<img

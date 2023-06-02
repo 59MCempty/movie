@@ -26,7 +26,7 @@ const Navbar = () => {
 			</div>
 
 			<div className="col-span-3 h-full">
-				<ul className="flex justify-between items-center list-none h-full text-xl">
+				<ul className="flex justify-evenly items-center list-none h-full text-xl">
 					<NavLink to="/" className={({isActive}) =>
 						isActive ? "navbarActive" : "navbarHeader"}>Home</NavLink>
 
@@ -35,21 +35,10 @@ const Navbar = () => {
 
 					<NavLink to="/tv" className={({isActive}) =>
 						isActive ? "navbarActive" : "navbarHeader"}>TV Show</NavLink>
-
-					<NavLink to="/my_list" className={({isActive}) =>
-						isActive ? "navbarActive" : "navbarHeader"}>My List</NavLink>
 				</ul>
 			</div>
 
 			<div className="col-span-5 flex items-center justify-center">
-				{/*<div className="w-[50%] relative opacity-70">*/}
-				{/*	<input*/}
-				{/*		onKeyUp={submitAction}*/}
-				{/*		onChange={(e) => userInput(e)}*/}
-				{/*		type="text"*/}
-				{/*		className="text-black w-full pl-10 text-xl rounded-xl border-2 border-gray-200 outline outline-gray-500"/>*/}
-				{/*	<BsSearch className="absolute top-1.5 left-2 text-black" size={20}/>*/}
-				{/*</div>*/}
 			</div>
 			<div className="col-span-2 flex justify-end">
 				<Link to="search" className="navbarHeader text-xl uppercase items-center flex my-3">search</Link>
